@@ -4,7 +4,9 @@
             [lt.objs.command :as cmd]
             [lt.objs.editor :as editor]
             [lt.objs.editor.pool :as editor-pool]
-            [cljs.reader :refer [read-string] :as rdr])
+            [cljs.reader :refer [read-string] :as rdr]
+            [cljs.tools.reader.reader-types :as reader-types]
+            [cljs.tools.reader :as edn])
   (:require-macros [lt.macros :refer [defui behavior]]))
 
 (defui hello-panel [this]
@@ -28,10 +30,15 @@
 
 (def hello (object/create ::lt-cljs-playground.hello))
 
+(comment (with-redefs [rdr/macros (fn [c]
+                                    (println "Blah!")
+                                    )]
+           (rdr/read-string "`(+ 1 1)")
+           ))
+
 (defrecord EditorPushbackReader [ed state]
   rdr/PushbackReader
   (read-char [_]
-             (println @state)
              (if (seq (:buffer @state))
                (let [popped (last (:buffer @state))]
                  (swap! state update-in [:buffer] pop)
@@ -41,11 +48,10 @@
                    (loop [line-contents (editor/line ed (inc line))
                           line (inc line)]
                      (cond
-                       (nil? line-contents) (do (swap! state assoc :eof? true) nil)
+                       (nil? line-contents) (do (swap! state assoc :eof? true) (println "THE END!" @state) nil)
                        (clojure.string/blank? line-contents) (recur (editor/line ed (inc line)) (inc line))
                        :else (do
-                               (println ">>>>" line line-contents)
-                               (swap! state assoc :line line :col 0 :line-contents line-contents)
+                               (swap! state assoc :line line :col 1 :line-contents line-contents)
                                (aget line-contents 0))))
                    (do
                      (swap! state update-in [:col] inc)
@@ -68,10 +74,10 @@
   (loop [forms []
          r (editor-pushback-reader ed)]
     (if-not (:eof? @(:state r))
-      (let [form (rdr/read r false nil true)
+      (let [form (rdr/read r false :end true)
             state @(:state r)]
         (recur (conj forms form)
-               (assoc r :state (atom (default-reader-state ed (:line state) (inc (:col state)))))))
+               (assoc r :state (atom (default-reader-state ed (:line state) (:col state))))))
       forms)))
 
 (cmd/command {:command ::run-dis
