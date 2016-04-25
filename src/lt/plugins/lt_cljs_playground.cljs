@@ -30,12 +30,6 @@
 
 (def hello (object/create ::lt-cljs-playground.hello))
 
-(comment (with-redefs [rdr/macros (fn [c]
-                                    (println "Blah!")
-                                    )]
-           (rdr/read-string "`(+ 1 1)")
-           ))
-
 (defrecord EditorPushbackReader [ed state]
   rdr/PushbackReader
   (read-char [_]
