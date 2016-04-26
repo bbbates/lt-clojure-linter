@@ -4,53 +4,56 @@
             [lt.objs.command :as cmd]
             [lt.objs.editor :as editor]
             [lt.objs.editor.pool :as editor-pool]
-            [cljs.reader :refer [read-string] :as rdr]
-            [cljs.tools.reader.reader-types :as reader-types]
-            [cljs.tools.reader :as edn])
+            [cljs.extended.reader :as rdr])
   (:require-macros [lt.macros :refer [defui behavior]]))
 
-(defui hello-panel [this]
-  [:h1 "Hello from lt-cljs-playground"])
+(defn- next-char-from-reader
+  "Takes the reader state and editor, and returns the next char and new state
+  of the reader"
+  [ed {:keys [line-contents line col buffer] :as state}]
+  (if (seq buffer)
+    ;; a char has been pushed back onto the buffer
+    (let [popped (last buffer)]
+      [popped (update-in state [:buffer] pop)])
 
-(object/object* ::lt-cljs-playground.hello
-                :tags [:lt-cljs-playground.hello]
-                :behaviors [::on-close-destroy]
-                :name "lt-cljs-playground"
-                :init (fn [this]
-                        (hello-panel this)))
-
-(behavior ::on-close-destroy
-          :triggers #{:close}
-          :desc "lt-cljs-playground: Close tab and tabset as well if last tab"
-          :reaction (fn [this]
-                      (when-let [ts (:lt.objs.tabs/tabset @this)]
-                        (when (= (count (:objs @ts)) 1)
-                          (tabs/rem-tabset ts)))
-                      (object/raise this :destroy)))
-
-(def hello (object/create ::lt-cljs-playground.hello))
+    ;; read the next char from the editor
+    (if (< (count line-contents) col)
+      ;; end of line
+      (loop [line-contents (editor/line ed (inc line))
+             line (inc line)]
+        (cond
+          (nil? line-contents) [nil (assoc state :eof? true)]
+          (clojure.string/blank? line-contents) (recur (editor/line ed (inc line)) (inc line))
+          :else [(.charAt line-contents 0) (assoc state :line line :col 1 :line-contents line-contents)]))
+      [(if (= "" (.charAt line-contents col))
+         "\n"
+         (.charAt line-contents col))
+       (update-in state [:col] inc)])))
 
 (defrecord EditorPushbackReader [ed state]
-  rdr/PushbackReader
+  rdr/Reader
   (read-char [_]
-             (if (seq (:buffer @state))
-               (let [popped (last (:buffer @state))]
-                 (swap! state update-in [:buffer] pop)
-                 popped)
-               (let [{:keys [line-contents line col]} @state]
-                 (if (<= (count line-contents) col)
-                   (loop [line-contents (editor/line ed (inc line))
-                          line (inc line)]
-                     (cond
-                       (nil? line-contents) (do (swap! state assoc :eof? true) (println "THE END!" @state) nil)
-                       (clojure.string/blank? line-contents) (recur (editor/line ed (inc line)) (inc line))
-                       :else (do
-                               (swap! state assoc :line line :col 1 :line-contents line-contents)
-                               (aget line-contents 0))))
-                   (do
-                     (swap! state update-in [:col] inc)
-                     (aget line-contents col))))))
-  (unread [_ ch] (swap! state update-in [:buffer] conj ch)))
+             (let [[next-char new-state] (next-char-from-reader ed @state)]
+               (when (nil? next-char) new-state @state)
+               (reset! state new-state)
+               next-char))
+  (peek-char [_] (first (next-char-from-reader ed @state)))
+
+  rdr/IPushbackReader
+  (unread [_ ch] (swap! state update-in [:buffer] conj ch))
+
+  rdr/IndexingReader
+  (get-line-number [_]
+                   (-> (next-char-from-reader ed @state)
+                       (last)
+                       (:line)
+                       (inc)))
+  (get-column-number [reader]
+                     (-> (next-char-from-reader ed @state)
+                         (last)
+                         (:col)
+                         (inc)))
+  (get-file-name [reader] (get-in @ed [:info :path])))
 
 (defn- default-reader-state
   [ed start-line start-col]
@@ -67,16 +70,15 @@
   [ed]
   (loop [forms []
          r (editor-pushback-reader ed)]
-    (if-not (:eof? @(:state r))
-      (let [form (rdr/read r false :end true)
+    (if-not (or (:eof? @(:state r)) (= :end (last forms)))
+      (let [form (rdr/read r false :end)
             state @(:state r)]
         (recur (conj forms form)
                (assoc r :state (atom (default-reader-state ed (:line state) (:col state))))))
-      forms)))
+      (remove #(= :end %) forms))))
 
 (cmd/command {:command ::run-dis
               :desc "Idiocheck: Run dis"
               :exec (fn []
 											(when-let [ed (editor-pool/last-active)]
                         (println (read-all-forms-in-editor ed))))})
-
