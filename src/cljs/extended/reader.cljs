@@ -691,8 +691,9 @@
           (with-meta o (merge (meta o) m)))
         (reader-error rdr "Metadata can only be applied to IWithMetas")))))
 
-(def UNQUOTE :__thisInternalKeywordRepresentsUnquoteToTheReader__)
-(def UNQUOTE-SPLICING :__thisInternalKeywordRepresentsUnquoteSplicingToTheReader__)
+(def UNQUOTE ::__thisInternalKeywordRepresentsUnquoteToTheReader__)
+(def UNQUOTE-SPLICING ::__thisInternalKeywordRepresentsUnquoteSplicingToTheReader__)
+(def SYNTAX-QUOTE ::syntaxQuote)
 
 (declare syntaxQuote)
 (def ^:dynamic *gensym-env* (atom nil))
@@ -961,7 +962,7 @@
    (identical? c \') (wrapping-reader 'quote)
    (identical? c \@) (wrapping-reader 'deref)
    (identical? c \^) read-meta
-   (identical? c \`) not-implemented ;read-syntax-quote
+   (identical? c \`) (wrapping-reader SYNTAX-QUOTE)
    (identical? c \~) read-unquote
    (identical? c \() read-list
    (identical? c \)) read-unmatched-delimiter
