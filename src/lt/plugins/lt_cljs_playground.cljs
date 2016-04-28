@@ -4,7 +4,9 @@
             [lt.objs.command :as cmd]
             [lt.objs.editor :as editor]
             [lt.objs.editor.pool :as editor-pool]
-            [cljs.extended.reader :as rdr])
+            [cljs.extended.reader :as rdr]
+            [kibit.check :as kibit]
+            [cljs.core.logic :as logic])
   (:require-macros [lt.macros :refer [defui behavior]]))
 
 (defn- next-char-from-reader
@@ -66,19 +68,30 @@
   [ed]
   (EditorPushbackReader. ed (atom (default-reader-state ed 0 0))))
 
+(defn- read-expr-with-meta
+  [reader]
+  (let [form (rdr/read reader false :end)]
+    (if (satisfies? IWithMeta form)
+      (with-meta form {:line (:line @(:state reader)) :column (:col @(:state reader))})
+      form)))
+
 (defn read-all-forms-in-editor
   [ed]
   (loop [forms []
          r (editor-pushback-reader ed)]
     (if-not (or (:eof? @(:state r)) (= :end (last forms)))
-      (let [form (rdr/read r false :end)
+      (let [form (read-expr-with-meta r)
             state @(:state r)]
         (recur (conj forms form)
                (assoc r :state (atom (default-reader-state ed (:line state) (:col state))))))
-      (remove #(= :end %) forms))))
+      (butlast forms))))
 
 (cmd/command {:command ::run-dis
               :desc "Idiocheck: Run dis"
               :exec (fn []
 											(when-let [ed (editor-pool/last-active)]
-                        (println (read-all-forms-in-editor ed))))})
+                        (let [forms (read-all-forms-in-editor ed)]
+                          (map kibit/check-expr forms)
+
+
+                          )))})
