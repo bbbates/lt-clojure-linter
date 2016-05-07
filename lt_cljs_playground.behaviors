@@ -1,3 +1,0 @@
-[
- [:app :lt.objs.plugins/load-js "lt_cljs_playground_compiled.js"]
- ]

@@ -1,6 +1,8 @@
-{:name "lt_cljs_playground"
+{:name "lt-clojure-linter"
  :version "0.0.1"
- :author ""
- :source ""
- :desc ""
- :behaviors "lt_cljs_playground.behaviors"}
+ :author "Brendan Bates"
+ :source "https://github.com/bbbates/lt-clojure-linter"
+ :desc "Linter for Clojure(script), powered by Kibit."
+ :behaviors "lt_clojure_linter.behaviors"
+ :dependencies {"lt_lint" "0.0.1"}
+ }
