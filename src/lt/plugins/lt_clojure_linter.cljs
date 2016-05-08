@@ -46,10 +46,9 @@
 (def bg-expr-check
   (background
     (fn [obj-id expr-checker-module editor-text]
-      (js-delete js/require.cache expr-checker-module)
       (let [lt (js/require expr-checker-module)]
         (->>
-          (js/lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text editor-text)
+          (expr-checker/lint-editor-text editor-text)
           (raise obj-id :exprs-check-complete))))))
 
 (behavior ::do-lint
