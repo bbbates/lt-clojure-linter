@@ -1,6 +1,8 @@
 [
   [:app :lt.objs.plugins/load-js "lt-clojure-linter_compiled.js"]
 
+  [:lt.plugins.lt-clojure-linter/expr-check :lt.plugins.lt-clojure-linter/kibit-expr-checker-callback]
+
   [:clojure-linted :lt.objs.editor.lint/register-linter [:lt.plugins.lt-clojure-linter/clojure-linter]]
 
   [:editor.clj :lt.object/add-tag :clojure-linted]

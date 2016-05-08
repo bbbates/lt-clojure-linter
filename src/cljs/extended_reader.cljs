@@ -2,7 +2,7 @@
   (:require [goog.string :as gstring]
             [clojure.string :as string]))
 
-;; Patched version of cljs.extended.reader - forked from the rewrite-cljs project:
+;; Patched version of cljs.extended-reader - forked from the rewrite-cljs project:
 ;; https://github.com/rundis/rewrite-cljs/blob/0.3.1/src/cljs/extended/reader.cljs
 
 (def specials '#{if def fn* do let* loop* letfn* throw try* recur new set! ns deftype* defrecord* . js* & quote})
@@ -293,7 +293,7 @@
 (defn reader-error
   [^not-native rdr & msg]
   (let [error-msg (apply str msg)]
-    (throw (js/Error. (str error-msg (when (implements? cljs.extended.reader.IndexingReader rdr)
+    (throw (js/Error. (str error-msg (when (implements? cljs.extended-reader.IndexingReader rdr)
                                        (str ", on line: " (get-line-number rdr)
                                             ", on column: " (get-column-number rdr))))))))
 
@@ -537,7 +537,7 @@
 
 
 (defn maybe-get-pos [^not-native rdr]
-  (when (implements? cljs.extended.reader.IndexingReader rdr)
+  (when (implements? cljs.extended-reader.IndexingReader rdr)
     {:line (get-line-number rdr)
      :column (dec (get-column-number rdr))}))
 
@@ -549,7 +549,7 @@
             :source source})))
 
 (defn with-source-log [^not-native rdr f prefix]
-  (if (instance? cljs.extended.reader/SourceLoggingPushbackReader rdr)
+  (if (instance? cljs.extended-reader/SourceLoggingPushbackReader rdr)
     (let [frame (.-source-log-frames rdr)
           new-frame (atom (assoc-in @frame [:offset] (.getLength (:buffer @frame))))
           ret (f)
@@ -668,7 +668,7 @@
 
 (defn read-meta
   [^not-native rdr _]
-  (let [[line column] (when (implements? cljs.extended.reader.IndexingReader rdr)
+  (let [[line column] (when (implements? cljs.extended-reader.IndexingReader rdr)
                         [(get-line-number rdr) (dec (get-column-number rdr))])
         m (desugar-meta (read rdr true nil true))]
     (when-not (map? m)
@@ -1140,10 +1140,4 @@
         old-parser (get @*tag-table* tag)]
     (swap! *tag-table* dissoc tag)
     old-parser))
-
-
-
-;(read-string-source-logged "(+ 1 1)")
-
-
 

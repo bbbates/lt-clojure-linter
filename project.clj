@@ -2,4 +2,13 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [kibit-cljs "0.1.0-SNAPSHOT"]
                  [org.clojure/core.logic "0.8.7"]
-                 [org.clojure/core.async "0.1.338.0-5c5012-alpha"]])
+                 [org.clojure/core.async "0.1.338.0-5c5012-alpha"]]
+  :profiles {:expr-checker {:dependencies [[org.clojure/clojurescript "0.0-2138"]]
+                            :plugins [[lein-cljsbuild "1.0.1"]]
+                            :cljsbuild {:builds [{:id "expr-checker-module"
+                                                  :source-paths ["src/lt/plugins/lt_clojure_linter" "src/cljs"]
+                                                  :compiler {:optimizations :simple
+                                                             :output-wrapper true
+                                                             :output-to "expr-checker-module.js"
+                                                             :pretty-print true }}]}}}
+  )
