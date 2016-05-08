@@ -17659,16 +17659,20 @@ lt.plugins.lt_clojure_linter.expr_checker.editor_pushback_reader = function(a) {
 };
 lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor = function(a) {
   a = cljs.core.vec.call(null, clojure.string.split.call(null, a, /\n/));
-  for (var b = cljs.core.PersistentVector.EMPTY, c = lt.plugins.lt_clojure_linter.expr_checker.editor_pushback_reader.call(null, a);;) {
-    if (cljs.core.not.call(null, function() {
-      var a = (new cljs.core.Keyword(null, "eof?", "eof?", 1017023029)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, (new cljs.core.Keyword(null, "state", "state", 1123661827)).cljs$core$IFn$_invoke$arity$1(c)));
-      return cljs.core.truth_(a) ? a : cljs.core._EQ_.call(null, new cljs.core.Keyword(null, "end", "end", 1014004813), cljs.core.last.call(null, b));
-    }())) {
-      var d = cljs.extended_reader.read.call(null, c, !1, new cljs.core.Keyword(null, "end", "end", 1014004813)), e = cljs.core.deref.call(null, (new cljs.core.Keyword(null, "state", "state", 1123661827)).cljs$core$IFn$_invoke$arity$1(c)), d = cljs.core.conj.call(null, b, d), e = cljs.core.assoc.call(null, c, new cljs.core.Keyword(null, "state", "state", 1123661827), cljs.core.atom.call(null, lt.plugins.lt_clojure_linter.expr_checker.default_reader_state.call(null, a, (new cljs.core.Keyword(null, 
-      "line", "line", 1017226086)).cljs$core$IFn$_invoke$arity$1(e), (new cljs.core.Keyword(null, "col", "col", 1014002930)).cljs$core$IFn$_invoke$arity$1(e)))), b = d, c = e
-    } else {
-      return cljs.core.butlast.call(null, b);
+  if (cljs.core.seq.call(null, a)) {
+    for (var b = cljs.core.PersistentVector.EMPTY, c = lt.plugins.lt_clojure_linter.expr_checker.editor_pushback_reader.call(null, a);;) {
+      if (cljs.core.not.call(null, function() {
+        var a = (new cljs.core.Keyword(null, "eof?", "eof?", 1017023029)).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null, (new cljs.core.Keyword(null, "state", "state", 1123661827)).cljs$core$IFn$_invoke$arity$1(c)));
+        return cljs.core.truth_(a) ? a : cljs.core._EQ_.call(null, new cljs.core.Keyword(null, "end", "end", 1014004813), cljs.core.last.call(null, b));
+      }())) {
+        var d = cljs.extended_reader.read.call(null, c, !1, new cljs.core.Keyword(null, "end", "end", 1014004813)), e = cljs.core.deref.call(null, (new cljs.core.Keyword(null, "state", "state", 1123661827)).cljs$core$IFn$_invoke$arity$1(c)), d = cljs.core.conj.call(null, b, d), e = cljs.core.assoc.call(null, c, new cljs.core.Keyword(null, "state", "state", 1123661827), cljs.core.atom.call(null, lt.plugins.lt_clojure_linter.expr_checker.default_reader_state.call(null, a, (new cljs.core.Keyword(null, 
+        "line", "line", 1017226086)).cljs$core$IFn$_invoke$arity$1(e), (new cljs.core.Keyword(null, "col", "col", 1014002930)).cljs$core$IFn$_invoke$arity$1(e)))), b = d, c = e
+      } else {
+        return cljs.core.butlast.call(null, b);
+      }
     }
+  } else {
+    return null;
   }
 };
 lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result = function(a) {

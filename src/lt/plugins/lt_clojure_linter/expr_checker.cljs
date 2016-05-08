@@ -63,14 +63,15 @@
 (defn read-all-forms-in-editor
   [editor-text]
   (let [line-seq (vec (clojure.string/split editor-text #"\n"))]
-    (loop [forms []
-           r (editor-pushback-reader line-seq)]
-      (if-not (or (:eof? @(:state r)) (= :end (last forms)))
-        (let [form (rdr/read r false :end)
-              state @(:state r)]
-          (recur (conj forms form)
-                 (assoc r :state (atom (default-reader-state line-seq (:line state) (:col state))))))
-        (butlast forms)))))
+    (when (seq line-seq)
+      (loop [forms []
+             r (editor-pushback-reader line-seq)]
+        (if-not (or (:eof? @(:state r)) (= :end (last forms)))
+          (let [form (rdr/read r false :end)
+                state @(:state r)]
+            (recur (conj forms form)
+                   (assoc r :state (atom (default-reader-state line-seq (:line state) (:col state))))))
+          (butlast forms))))))
 
 (defn- ->expr-check-result
   [{:keys [expr alt] :as res}]
