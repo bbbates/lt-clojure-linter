@@ -27,13 +27,15 @@
                 :init (fn [this callback]
                         (object/merge! this {:callback callback})))
 
-
+(defn- ->linter-result
+  [{:keys [alt] :as res}]
+  (assoc res :message (str "Consider using: " alt)))
 
 (behavior ::kibit-expr-checker-callback
           :triggers #{:exprs-check-complete}
           :reaction (fn [this results]
-                      (println "DONE!!!!")
-                      (println (first (:results results)))))
+                      (let [callback (:callback @this)]
+                        (callback (map ->linter-result (:results results))))))
 
 (def plugin-id "lt-clojure-linter")
 

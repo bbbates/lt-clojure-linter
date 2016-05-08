@@ -17671,7 +17671,7 @@ lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor = function(a)
     }
   }
 };
-lt.plugins.lt_clojure_linter.expr_checker.__GT_linter_result = function(a) {
+lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result = function(a) {
   var b = cljs.core.seq_QMARK_.call(null, a) ? cljs.core.apply.call(null, cljs.core.hash_map, a) : a;
   a = cljs.core.get.call(null, b, new cljs.core.Keyword(null, "alt", "alt", 1014000923));
   var b = cljs.core.get.call(null, b, new cljs.core.Keyword(null, "expr", "expr", 1017032039)), b = cljs.core.meta.call(null, b), c = cljs.core.seq_QMARK_.call(null, b) ? cljs.core.apply.call(null, cljs.core.hash_map, b) : b, b = cljs.core.get.call(null, c, new cljs.core.Keyword(null, "end-column", "end-column", 3799845882)), d = cljs.core.get.call(null, c, new cljs.core.Keyword(null, "end-line", "end-line", 2693041432)), e = cljs.core.get.call(null, c, new cljs.core.Keyword(null, "column", "column", 
@@ -17682,8 +17682,7 @@ lt.plugins.lt_clojure_linter.expr_checker.__GT_linter_result = function(a) {
 lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text = function(a) {
   a = lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor.call(null, a);
   a = cljs.core.keep.call(null, kibit.check.check_expr, a);
-  cljs.core.println.call(null, cljs.core.pr_str.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", 2111450984), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_linter_result, a)], null)));
-  return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", 2111450984), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_linter_result, a)], null);
+  return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", 2111450984), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result, a)], null);
 };
 goog.exportSymbol("lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text", lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text);
 

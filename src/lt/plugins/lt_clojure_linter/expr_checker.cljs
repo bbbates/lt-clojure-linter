@@ -72,7 +72,7 @@
                  (assoc r :state (atom (default-reader-state line-seq (:line state) (:col state))))))
         (butlast forms)))))
 
-(defn- ->linter-result
+(defn- ->expr-check-result
   [{:keys [expr alt] :as res}]
   (let [{:keys [line column end-line end-column]} (meta expr)]
     {:alt (pr-str alt)
@@ -84,5 +84,4 @@
   [editor-text]
   (let [forms (read-all-forms-in-editor editor-text)
         results (keep kibit/check-expr forms)]
-    (println (pr-str {:results (map ->linter-result results)}))
-    {:results (map ->linter-result results)}))
+    {:results (map ->expr-check-result results)}))
