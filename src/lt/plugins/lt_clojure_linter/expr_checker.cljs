@@ -83,6 +83,9 @@
 
 (defn ^:export lint-editor-text
   [editor-text]
-  (let [forms (read-all-forms-in-editor editor-text)
-        results (keep kibit/check-expr forms)]
-    {:results (map ->expr-check-result results)}))
+  (try
+    (let [forms (read-all-forms-in-editor editor-text)
+          results (keep kibit/check-expr forms)]
+      {:results (map ->expr-check-result results)})
+    (catch :default err
+      {:error err})))

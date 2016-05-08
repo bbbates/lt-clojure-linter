@@ -31,8 +31,10 @@
           :triggers #{:exprs-check-complete}
           :reaction (fn [this results]
                       (let [results (or (:results results) [])
-                            callback (:callback @this)]
-                        (notifos/done-working (str "Done checking expressions, found " (count results) " suggestions."))
+                            err (:error results)
+                            callback (:callback @this)
+                            message (when-not err (str "Done checking expressions, found " (count results) " suggestions."))]
+                        (notifos/done-working message)
                         (callback (map ->linter-result results)))))
 
 (def plugin-id "lt-clojure-linter")
@@ -51,7 +53,9 @@
 
 (behavior ::do-lint
           :triggers #{:lt.objs.editor.lint/validate}
-          :reaction (fn [obj editor-text callback]
-                      (notifos/working "Checking clojure expressions...")
-                      (bg-expr-check (object/create ::kibit-expr-checker callback)
-                                     (expr-checker-module) editor-text)))
+          :reaction (fn [obj editor-text callback ed]
+                      (let [checking-ns (:ns (:info @ed))]
+                        (notifos/working (str "Checking " (name (or checking-ns "")) "..."))
+                        (bg-expr-check (object/create ::kibit-expr-checker callback)
+                                       (expr-checker-module) editor-text))))
+

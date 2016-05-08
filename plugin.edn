@@ -4,5 +4,5 @@
  :source "https://github.com/bbbates/lt-clojure-linter"
  :desc "Linter for Clojure(script), powered by Kibit."
  :behaviors "lt_clojure_linter.behaviors"
- :dependencies {"lt_lint" "0.0.1"}
+ :dependencies {"lt-lint" "0.0.1"}
  }
