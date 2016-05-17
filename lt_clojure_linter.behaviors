@@ -3,10 +3,10 @@
 
   [:lt.plugins.lt-clojure-linter/expr-check :lt.plugins.lt-clojure-linter/kibit-expr-checker-callback]
 
-  [:clojure-linted :lt.objs.editor.lint/register-linter [:lt.plugins.lt-clojure-linter/clojure-linter]]
+  [:clojure-linted :lt.plugins.lt-lint/register-linter [:lt.plugins.lt-clojure-linter/clojure-linter]]
 
-;;  [:editor.clj :lt.object/add-tag :clojure-linted]
-;;  [:editor.cljs :lt.object/add-tag :clojure-linted]
-;;  [:editor.cljc :lt.object/add-tag :clojure-linted]
-;;  [:editor.clojure :lt.object/add-tag :clojure-linted]
+  [:editor.clj :lt.object/add-tag :clojure-linted]
+  [:editor.cljs :lt.object/add-tag :clojure-linted]
+  [:editor.cljc :lt.object/add-tag :clojure-linted]
+  [:editor.clojure :lt.object/add-tag :clojure-linted]
   ]

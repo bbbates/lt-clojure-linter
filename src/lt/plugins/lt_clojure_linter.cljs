@@ -10,7 +10,6 @@
   (:require-macros [lt.macros :refer [behavior background]]))
 
 (object/object* ::clojure-linter
-                :triggers [:lt.objs.editor.lint/validate]
                 :behaviors [::do-lint]
                 :timeout 60000
                 :linter-name "clojure expression checker")
@@ -52,7 +51,7 @@
           (raise obj-id :exprs-check-complete))))))
 
 (behavior ::do-lint
-          :triggers #{:lt.objs.editor.lint/validate}
+          :triggers #{:lt.plugins.lt-lint/validate}
           :reaction (fn [obj editor-text callback ed]
                       (let [checking-ns (:ns (:info @ed))]
                         (notifos/working (str "Checking " (name (or checking-ns "")) "..."))

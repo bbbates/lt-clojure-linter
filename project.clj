@@ -1,8 +1,7 @@
 (defproject lt-clojure-linter "0.0.1"
   :dependencies [[org.clojure/clojure "1.5.1"]
-                 [kibit-cljs "0.1.0-SNAPSHOT"]
-                 [org.clojure/core.logic "0.8.7"]
-                 [org.clojure/core.async "0.1.338.0-5c5012-alpha"]]
+                 [kibit-cljs "0.1.0"]
+                 [org.clojure/core.logic "0.8.7"]]
   :profiles {:expr-checker {:dependencies [[org.clojure/clojurescript "0.0-2138"]]
                             :plugins [[lein-cljsbuild "1.0.1"]]
                             :cljsbuild {:builds [{:id "expr-checker-module"
