@@ -89,4 +89,5 @@
           results (keep #(kibit/check-expr % :resolution :subform) exprs)]
       {:results (map ->expr-check-result results)})
     (catch :default err
+      (.log js/console "ERR!" err)
       {:error err})))

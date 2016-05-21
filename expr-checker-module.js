@@ -3557,16 +3557,16 @@ cljs.core.fn_QMARK_ = function(a) {
 };
 cljs.core.with_meta = function with_meta(b, c) {
   return cljs.core.fn_QMARK_.call(null, b) && !(b ? b.cljs$lang$protocol_mask$partition0$ & 262144 || b.cljs$core$IWithMeta$ || (b.cljs$lang$protocol_mask$partition0$ ? 0 : cljs.core.native_satisfies_QMARK_.call(null, cljs.core.IWithMeta, b)) : cljs.core.native_satisfies_QMARK_.call(null, cljs.core.IWithMeta, b)) ? with_meta.call(null, function() {
-    "undefined" === typeof cljs.core.t5862 && (cljs.core.t5862 = function(b, c, f, g) {
+    "undefined" === typeof cljs.core.t5865 && (cljs.core.t5865 = function(b, c, f, g) {
       this.meta = b;
       this.o = c;
       this.with_meta = f;
-      this.meta5863 = g;
+      this.meta5866 = g;
       this.cljs$lang$protocol_mask$partition1$ = 0;
       this.cljs$lang$protocol_mask$partition0$ = 393217;
-    }, cljs.core.t5862.cljs$lang$type = !0, cljs.core.t5862.cljs$lang$ctorStr = "cljs.core/t5862", cljs.core.t5862.cljs$lang$ctorPrWriter = function(b, c, f) {
-      return cljs.core._write.call(null, c, "cljs.core/t5862");
-    }, cljs.core.t5862.prototype.call = function() {
+    }, cljs.core.t5865.cljs$lang$type = !0, cljs.core.t5865.cljs$lang$ctorStr = "cljs.core/t5865", cljs.core.t5865.cljs$lang$ctorPrWriter = function(b, c, f) {
+      return cljs.core._write.call(null, c, "cljs.core/t5865");
+    }, cljs.core.t5865.prototype.call = function() {
       var b = function(b, c) {
         return cljs.core.apply.call(null, b.o, c);
       }, c = function(c, e) {
@@ -3583,9 +3583,9 @@ cljs.core.with_meta = function with_meta(b, c) {
       };
       c.cljs$core$IFn$_invoke$arity$variadic = b;
       return c;
-    }(), cljs.core.t5862.prototype.apply = function(b, c) {
+    }(), cljs.core.t5865.prototype.apply = function(b, c) {
       return this.call.apply(this, [this].concat(cljs.core.aclone.call(null, c)));
-    }, cljs.core.t5862.prototype.cljs$core$IFn$_invoke$arity$2 = function() {
+    }, cljs.core.t5865.prototype.cljs$core$IFn$_invoke$arity$2 = function() {
       var b = function(b) {
         return cljs.core.apply.call(null, self__.o, b);
       }, c = function(c) {
@@ -3600,14 +3600,14 @@ cljs.core.with_meta = function with_meta(b, c) {
       };
       c.cljs$core$IFn$_invoke$arity$variadic = b;
       return c;
-    }(), cljs.core.t5862.prototype.cljs$core$Fn$ = !0, cljs.core.t5862.prototype.cljs$core$IMeta$_meta$arity$1 = function(b) {
-      return this.meta5863;
-    }, cljs.core.t5862.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
-      return new cljs.core.t5862(this.meta, this.o, this.with_meta, c);
-    }, cljs.core.__GT_t5862 = function(b, c, f, g) {
-      return new cljs.core.t5862(b, c, f, g);
+    }(), cljs.core.t5865.prototype.cljs$core$Fn$ = !0, cljs.core.t5865.prototype.cljs$core$IMeta$_meta$arity$1 = function(b) {
+      return this.meta5866;
+    }, cljs.core.t5865.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = function(b, c) {
+      return new cljs.core.t5865(this.meta, this.o, this.with_meta, c);
+    }, cljs.core.__GT_t5865 = function(b, c, f, g) {
+      return new cljs.core.t5865(b, c, f, g);
     });
-    return new cljs.core.t5862(c, b, with_meta, null);
+    return new cljs.core.t5865(c, b, with_meta, null);
   }(), c) : null == b ? null : cljs.core._with_meta.call(null, b, c);
 };
 cljs.core.meta = function(a) {
@@ -16973,7 +16973,7 @@ kibit.rules.util.compile_rule = function(a) {
   }], null);
 };
 kibit.rules.arithmetic = {};
-var rules__5158__auto___5508 = function() {
+var rules__5158__auto___5511 = function() {
   return function b(c) {
     return new cljs.core.LazySeq(null, function() {
       for (;;) {
@@ -17014,7 +17014,7 @@ var rules__5158__auto___5508 = function() {
   [cljs.core.list(new cljs.core.Symbol(null, "dec", "dec", -1640432197, null), cljs.core.list(new cljs.core.Symbol("Math", "exp", "Math/exp", -1488676984, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null))), cljs.core.list(new cljs.core.Symbol("Math", "expm1", "Math/expm1", -1392337428, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null))], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.list(new cljs.core.Symbol(null, 
   "long", "long", -1637203915, null), cljs.core.list(new cljs.core.Symbol(null, "+", "+", -1640531484, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null), 0.5)), cljs.core.list(new cljs.core.Symbol("Math", "round", "Math/round", -1375834311, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null))], null)));
 }();
-kibit.rules.arithmetic.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5508, cljs.core.PersistentVector.EMPTY));
+kibit.rules.arithmetic.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5511, cljs.core.PersistentVector.EMPTY));
 kibit.core = {};
 kibit.core.simplify_one = function(a, b) {
   var c = cljs.core.doall.call(null, function() {
@@ -17067,7 +17067,7 @@ kibit.core.simplify = function(a, b) {
   }), a))));
 };
 kibit.rules.equality = {};
-var rules__5158__auto___5502 = function() {
+var rules__5158__auto___5505 = function() {
   return function b(c) {
     return new cljs.core.LazySeq(null, function() {
       for (;;) {
@@ -17107,9 +17107,9 @@ var rules__5158__auto___5502 = function() {
   "\x3d", "\x3d", -1640531466, null), !1, new cljs.core.Symbol(null, "?x", "?x", -1640529454, null)), cljs.core.list(new cljs.core.Symbol(null, "false?", "false?", 1372554549, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null))], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.list(new cljs.core.Symbol(null, "\x3d", "\x3d", -1640531466, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null), null), cljs.core.list(new cljs.core.Symbol(null, 
   "nil?", "nil?", -1637150201, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null))], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.list(new cljs.core.Symbol(null, "\x3d", "\x3d", -1640531466, null), null, new cljs.core.Symbol(null, "?x", "?x", -1640529454, null)), cljs.core.list(new cljs.core.Symbol(null, "nil?", "nil?", -1637150201, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null))], null)));
 }();
-kibit.rules.equality.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5502, cljs.core.PersistentVector.EMPTY));
+kibit.rules.equality.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5505, cljs.core.PersistentVector.EMPTY));
 kibit.rules.control_structures = {};
-var rules__5158__auto___5496 = function() {
+var rules__5158__auto___5499 = function() {
   return function b(c) {
     return new cljs.core.LazySeq(null, function() {
       for (;;) {
@@ -17159,9 +17159,9 @@ var rules__5158__auto___5496 = function() {
   null), new cljs.core.Symbol(null, "?binding", "?binding", 674116383, null), new cljs.core.Symbol(null, ".", ".", -1640531481, null), new cljs.core.Symbol(null, "?exprs", "?exprs", 260066808, null))], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.list(new cljs.core.Symbol(null, "loop", "loop", -1637203875, null), new cljs.core.Symbol(null, "?binding", "?binding", 674116383, null), cljs.core.list(new cljs.core.Symbol(null, "do", "do", -1640528316, 
   null), new cljs.core.Symbol(null, ".", ".", -1640531481, null), new cljs.core.Symbol(null, "?exprs", "?exprs", 260066808, null))), cljs.core.list(new cljs.core.Symbol(null, "loop", "loop", -1637203875, null), new cljs.core.Symbol(null, "?binding", "?binding", 674116383, null), new cljs.core.Symbol(null, ".", ".", -1640531481, null), new cljs.core.Symbol(null, "?exprs", "?exprs", 260066808, null))], null)));
 }();
-kibit.rules.control_structures.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5496, cljs.core.PersistentVector.EMPTY));
+kibit.rules.control_structures.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5499, cljs.core.PersistentVector.EMPTY));
 kibit.rules.collections = {};
-var rules__5158__auto___5490 = function() {
+var rules__5158__auto___5493 = function() {
   return function b(c) {
     return new cljs.core.LazySeq(null, function() {
       for (;;) {
@@ -17212,14 +17212,17 @@ var rules__5158__auto___5490 = function() {
   2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.list(new cljs.core.Symbol(null, "into", "into", -1637294055, null), cljs.core.PersistentHashSet.EMPTY, new cljs.core.Symbol(null, "?coll", "?coll", -1579290268, null)), cljs.core.list(new cljs.core.Symbol(null, "set", "set", -1640417765, null), new cljs.core.Symbol(null, "?coll", "?coll", -1579290268, null))], null), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.list(new cljs.core.Symbol(null, 
   "take", "take", -1636979136, null), new cljs.core.Symbol(null, "?n", "?n", -1640529464, null), cljs.core.list(new cljs.core.Symbol(null, "repeatedly", "repeatedly", -480456640, null), new cljs.core.Symbol(null, "?coll", "?coll", -1579290268, null))), cljs.core.list(new cljs.core.Symbol(null, "repeatedly", "repeatedly", -480456640, null), new cljs.core.Symbol(null, "?n", "?n", -1640529464, null), new cljs.core.Symbol(null, "?coll", "?coll", -1579290268, null))], null)));
 }();
-kibit.rules.collections.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5490, cljs.core.PersistentVector.EMPTY));
+kibit.rules.collections.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5493, cljs.core.PersistentVector.EMPTY));
 kibit.rules.misc = {};
+kibit.rules.misc.is_upper_case_QMARK_ = function(a) {
+  return cljs.core.truth_(clojure.string.blank_QMARK_.call(null, a)) ? null : cljs.core._EQ_.call(null, clojure.string.upper_case.call(null, a), a);
+};
 kibit.rules.misc.class_symbol_QMARK_ = function(a) {
   a = cljs.core.pr_str.call(null, a);
   var b = a.lastIndexOf(".");
-  return 0 > b ? Character.isUpperCase.call(null, cljs.core.first.call(null, a)) : Character.isUpperCase.call(null, cljs.core.nth.call(null, a, b + 1));
+  return 0 > b ? kibit.rules.misc.is_upper_case_QMARK_.call(null, cljs.core.first.call(null, a)) : kibit.rules.misc.is_upper_case_QMARK_.call(null, cljs.core.nth.call(null, a, b + 1));
 };
-var rules__5158__auto___5479 = function() {
+var rules__5158__auto___5482 = function() {
   return function b(c) {
     return new cljs.core.LazySeq(null, function() {
       for (;;) {
@@ -17269,7 +17272,7 @@ var rules__5158__auto___5479 = function() {
   "meta", "meta", -1637183554, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null)), new cljs.core.Symbol(null, ".", ".", -1640531481, null), new cljs.core.Symbol(null, "?arg", "?arg", -1638557840, null))), cljs.core.list(new cljs.core.Symbol(null, "vary-meta", "vary-meta", -1312644487, null), new cljs.core.Symbol(null, "?x", "?x", -1640529454, null), new cljs.core.Symbol(null, "?f", "?f", -1640529472, null), new cljs.core.Symbol(null, ".", ".", -1640531481, null), new cljs.core.Symbol(null, 
   "?arg", "?arg", -1638557840, null))], null)));
 }();
-kibit.rules.misc.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5479, new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [function() {
+kibit.rules.misc.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, rules__5158__auto___5482, new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [function() {
   var a = cljs.core.logic.lvar.call(null), b = cljs.core.logic.lvar.call(null);
   return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [function(c) {
     return function(d) {
@@ -17333,7 +17336,7 @@ kibit.rules.misc.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, ru
             var b = cljs.core.seq_QMARK_.call(null, f), c = b ? cljs.core.rest.call(null, f) : g, e = b ? cljs.core.first.call(null, f) : f;
             return function(b) {
               var f = cljs.core.logic._unify.call(null, b, d, cljs.core.with_meta.call(null, cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core._conj.call(null, cljs.core.List.EMPTY, cljs.core.symbol.call(null, [cljs.core.str("."), cljs.core.str(e)].join(""))), cljs.core._conj.call(null, cljs.core.List.EMPTY, a), c)), cljs.core.apply.call(null, cljs.core.hash_map, cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, 
-              "line", "line", 1017226086)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 64), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "column", "column", 3954034376)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 41), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "end-line", "end-line", 2693041432)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 64), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, 
+              "line", "line", 1017226086)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 70), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "column", "column", 3954034376)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 41), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "end-line", "end-line", 2693041432)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 70), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, 
               "end-column", "end-column", 3799845882)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 81))))));
               return cljs.core.truth_(f) ? f : cljs.core.logic.fail.call(null, b);
             };
@@ -17370,7 +17373,7 @@ kibit.rules.misc.rules = cljs.core.vec.call(null, cljs.core.concat.call(null, ru
             var a = cljs.core.seq_QMARK_.call(null, g), b = a ? cljs.core.rest.call(null, g) : h, c = a ? cljs.core.first.call(null, g) : g;
             return function(a) {
               var e = cljs.core.logic._unify.call(null, a, d, cljs.core.with_meta.call(null, cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core._conj.call(null, cljs.core.List.EMPTY, cljs.core.symbol.call(null, [cljs.core.str(f), cljs.core.str("/"), cljs.core.str(c)].join(""))), b)), cljs.core.apply.call(null, cljs.core.hash_map, cljs.core.seq.call(null, cljs.core.concat.call(null, cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "line", "line", 1017226086)), 
-              cljs.core._conj.call(null, cljs.core.List.EMPTY, 76), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "column", "column", 3954034376)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 41), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "end-line", "end-line", 2693041432)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 76), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "end-column", "end-column", 
+              cljs.core._conj.call(null, cljs.core.List.EMPTY, 82), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "column", "column", 3954034376)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 41), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "end-line", "end-line", 2693041432)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 82), cljs.core._conj.call(null, cljs.core.List.EMPTY, new cljs.core.Keyword(null, "end-column", "end-column", 
               3799845882)), cljs.core._conj.call(null, cljs.core.List.EMPTY, 89))))));
               return cljs.core.truth_(e) ? e : cljs.core.logic.fail.call(null, a);
             };
@@ -17692,7 +17695,7 @@ lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text = function(a) {
     }(b, c), c);
     return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", 2111450984), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result, d)], null);
   } catch (e) {
-    return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "error", "error", 1110689146), e], null);
+    return console.log("ERR!", e), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "error", "error", 1110689146), e], null);
   }
 };
 goog.exportSymbol("lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text", lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text);

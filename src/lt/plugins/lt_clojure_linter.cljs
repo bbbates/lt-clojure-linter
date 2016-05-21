@@ -11,7 +11,7 @@
 
 (object/object* ::clojure-linter
                 :behaviors [::do-lint]
-                :timeout 180000
+                :timeout 360000 ;; wait a generous 6 minutes for kibit to do it's thing
                 :linter-name "clojure expression checker")
 
 (object/object* ::kibit-expr-checker
