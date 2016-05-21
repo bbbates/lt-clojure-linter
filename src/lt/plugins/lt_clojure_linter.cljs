@@ -11,7 +11,7 @@
 
 (object/object* ::clojure-linter
                 :behaviors [::do-lint]
-                :timeout 60000
+                :timeout 180000
                 :linter-name "clojure expression checker")
 
 (object/object* ::kibit-expr-checker
@@ -45,6 +45,7 @@
 (def bg-expr-check
   (background
     (fn [obj-id expr-checker-module editor-text]
+      (js-delete js/require.cache expr-checker-module)
       (let [lt (js/require expr-checker-module)]
         (->>
           (expr-checker/lint-editor-text editor-text)

@@ -85,7 +85,8 @@
   [editor-text]
   (try
     (let [forms (read-all-forms-in-editor editor-text)
-          results (keep kibit/check-expr forms)]
+          exprs (mapcat kibit/expr-seq forms)
+          results (keep #(kibit/check-expr % :resolution :subform) exprs)]
       {:results (map ->expr-check-result results)})
     (catch :default err
       {:error err})))

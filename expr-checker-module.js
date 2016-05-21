@@ -17685,10 +17685,14 @@ lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result = function(a) {
 };
 lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text = function(a) {
   try {
-    var b = lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor.call(null, a), c = cljs.core.keep.call(null, kibit.check.check_expr, b);
-    return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", 2111450984), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result, c)], null);
-  } catch (d) {
-    return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "error", "error", 1110689146), d], null);
+    var b = lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor.call(null, a), c = cljs.core.mapcat.call(null, kibit.check.expr_seq, b), d = cljs.core.keep.call(null, function(a, b) {
+      return function(a) {
+        return kibit.check.check_expr.call(null, a, new cljs.core.Keyword(null, "resolution", "resolution", 3708840990), new cljs.core.Keyword(null, "subform", "subform", 3440877174));
+      };
+    }(b, c), c);
+    return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", 2111450984), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result, d)], null);
+  } catch (e) {
+    return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "error", "error", 1110689146), e], null);
   }
 };
 goog.exportSymbol("lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text", lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text);
