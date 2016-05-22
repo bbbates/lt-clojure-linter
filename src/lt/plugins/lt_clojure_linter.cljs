@@ -4,8 +4,11 @@
             [lt.objs.editor :as editor]
             [lt.objs.editor.pool :as editor-pool]
             [lt.objs.plugins :as plugins]
-            [lt.objs.notifos :as notifos])
-  (:require-macros [lt.macros :refer [behavior background]]))
+            [lt.objs.notifos :as notifos]
+            [lt.objs.thread :as t]
+            [lt.plugins.lt-clojure-linter.threads :as threads])
+  (:require-macros [lt.macros :refer [behavior background]]
+                   [lt.plugins.lt-clojure-linter.macros :refer [background-with-pool]]))
 
 (object/object* ::clojure-linter
                 :behaviors [::do-lint]
@@ -40,13 +43,15 @@
   []
   (str plugins/user-plugins-dir "/" plugin-id "/expr-checker-module.js"))
 
+(def thread-pool (threads/create-pool))
+
 (def bg-expr-check
-  (background
+  (background-with-pool thread-pool
     (fn [obj-id expr-checker-module editor-text file-name]
       (js-delete js/require.cache expr-checker-module)
       (let [lt (js/require expr-checker-module)]
         (->>
-          (js/lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text editor-text)
+          (js/lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text editor-text file-name)
           (raise obj-id :exprs-check-complete))))))
 
 (behavior ::do-lint
