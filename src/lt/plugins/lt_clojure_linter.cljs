@@ -4,9 +4,7 @@
             [lt.objs.editor :as editor]
             [lt.objs.editor.pool :as editor-pool]
             [lt.objs.plugins :as plugins]
-            [lt.objs.notifos :as notifos]
-            [lt.plugins.lt-clojure-linter.expr-checker :as expr-checker]
-            [cljs.reader :as reader])
+            [lt.objs.notifos :as notifos])
   (:require-macros [lt.macros :refer [behavior background]]))
 
 (object/object* ::clojure-linter
@@ -48,7 +46,7 @@
       (js-delete js/require.cache expr-checker-module)
       (let [lt (js/require expr-checker-module)]
         (->>
-          (expr-checker/lint-editor-text editor-text)
+          (js/lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text editor-text)
           (raise obj-id :exprs-check-complete))))))
 
 (behavior ::do-lint
