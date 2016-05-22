@@ -8,10 +8,10 @@
 
 (defn read-all-forms-in-editor
   [editor-text file-name]
-  (binding [reader/resolve-symbol identity]
+  (binding [reader/resolve-symbol identity
+            reader/*default-data-reader-fn* (fn [_ form] form)]
     (when-not (clojure.string/blank? editor-text)
-      (loop [rdr (rt/indexing-push-back-reader editor-text 1 file-name)
-             forms []]
+      (loop [rdr (rt/indexing-push-back-reader editor-text 1 file-name) forms []]
         (if-not (= (last forms) :eof)
           (let [form (reader/read {:eof :eof} rdr)]
             (recur rdr (conj forms form)))
