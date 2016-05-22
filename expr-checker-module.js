@@ -29797,16 +29797,21 @@ var lt = {plugins:{}};
 lt.plugins.lt_clojure_linter = {};
 lt.plugins.lt_clojure_linter.expr_checker = {};
 cljs.core.enable_console_print_BANG_.call(null);
-lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor = function(a) {
-  if (clojure.string.blank_QMARK_.call(null, a)) {
-    return null;
-  }
-  a = cljs.tools.reader.reader_types.indexing_push_back_reader.call(null, a);
-  for (var b = cljs.core.PersistentVector.EMPTY;;) {
-    if (cljs.core._EQ_.call(null, cljs.core.last.call(null, b), new cljs.core.Keyword(null, "eof", "eof", -489063237))) {
-      return cljs.core.butlast.call(null, b);
+lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor = function(a, b) {
+  var c = cljs.tools.reader.resolve_symbol;
+  cljs.tools.reader.resolve_symbol = cljs.core.identity;
+  try {
+    if (clojure.string.blank_QMARK_.call(null, a)) {
+      return null;
     }
-    var c = cljs.tools.reader.read.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "eof", "eof", -489063237), new cljs.core.Keyword(null, "eof", "eof", -489063237)], null), a), b = cljs.core.conj.call(null, b, c);
+    for (var d = cljs.tools.reader.reader_types.indexing_push_back_reader.call(null, a, 1, b), e = cljs.core.PersistentVector.EMPTY;;) {
+      if (cljs.core._EQ_.call(null, cljs.core.last.call(null, e), new cljs.core.Keyword(null, "eof", "eof", -489063237))) {
+        return cljs.core.butlast.call(null, e);
+      }
+      var f = cljs.tools.reader.read.call(null, new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "eof", "eof", -489063237), new cljs.core.Keyword(null, "eof", "eof", -489063237)], null), d), g = d, h = cljs.core.conj.call(null, e, f), d = g, e = h;
+    }
+  } finally {
+    cljs.tools.reader.resolve_symbol = c;
   }
 };
 lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result = function(a) {
@@ -29828,16 +29833,16 @@ lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result = function(a) {
     return "" + cljs.core.str(m);
   }(), new cljs.core.Keyword(null, "severity", "severity", 175684886), new cljs.core.Keyword(null, "warning", "warning", -1685650671), new cljs.core.Keyword(null, "from", "from", 1815293044), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [g - 1, h - 1], null), new cljs.core.Keyword(null, "to", "to", 192099007), new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [k - 1, l - 1], null)], null);
 };
-lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text = function(a) {
+lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text = function(a, b) {
   try {
-    var b = lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor.call(null, a), c = cljs.core.mapcat.call(null, kibit.check.expr_seq, b), d = cljs.core.keep.call(null, function(a, b) {
+    var c = lt.plugins.lt_clojure_linter.expr_checker.read_all_forms_in_editor.call(null, a, b), d = cljs.core.mapcat.call(null, kibit.check.expr_seq, c), e = cljs.core.keep.call(null, function(a, b) {
       return function(a) {
         return kibit.check.check_expr.call(null, a, new cljs.core.Keyword(null, "resolution", "resolution", -756075601), new cljs.core.Keyword(null, "subform", "subform", -2142952624));
       };
-    }(b, c), c);
-    return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", -1134170113), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result, d)], null);
-  } catch (e) {
-    return cljs.core.println.call(null, "ERR!", e), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "error", "error", -978969032), e], null);
+    }(c, d), d);
+    return new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "results", "results", -1134170113), cljs.core.map.call(null, lt.plugins.lt_clojure_linter.expr_checker.__GT_expr_check_result, e)], null);
+  } catch (f) {
+    return cljs.core.println.call(null, "ERR!", f), new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null, "error", "error", -978969032), (new cljs.core.Keyword(null, "message", "message", -406056002)).cljs$core$IFn$_invoke$arity$1(f)], null);
   }
 };
 goog.exportSymbol("lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text", lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text);

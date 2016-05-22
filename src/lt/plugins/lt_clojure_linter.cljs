@@ -42,7 +42,7 @@
 
 (def bg-expr-check
   (background
-    (fn [obj-id expr-checker-module editor-text]
+    (fn [obj-id expr-checker-module editor-text file-name]
       (js-delete js/require.cache expr-checker-module)
       (let [lt (js/require expr-checker-module)]
         (->>
@@ -55,5 +55,5 @@
                       (let [checking-ns (:ns (:info @ed))]
                         (notifos/working (str "Checking " (name (or checking-ns "")) "..."))
                         (bg-expr-check (object/create ::kibit-expr-checker callback)
-                                       (expr-checker-module) editor-text))))
+                                       (expr-checker-module) editor-text (get-in @ed [:info :path])))))
 
