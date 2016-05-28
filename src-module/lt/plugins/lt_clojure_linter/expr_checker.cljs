@@ -48,7 +48,6 @@
   (try
     (let [forms (read-all-forms-in-editor editor-text file-name)
           exprs (mapcat kibit/expr-seq forms)
-          _ (doseq [f exprs] (println ">>>" (type f) ":" f))
           results (keep #(kibit/check-expr % :resolution :subform) exprs)]
       {:results (map ->expr-check-result results)})
     (catch :default err
