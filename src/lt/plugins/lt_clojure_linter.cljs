@@ -48,7 +48,6 @@
 (def bg-expr-check
   (background-with-pool thread-pool
     (fn [obj-id expr-checker-module editor-text file-name]
-      (js-delete js/require.cache expr-checker-module)
       (let [lt (js/require expr-checker-module)]
         (->>
           (js/lt.plugins.lt_clojure_linter.expr_checker.lint_editor_text editor-text file-name)
