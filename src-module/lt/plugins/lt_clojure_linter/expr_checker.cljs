@@ -39,15 +39,16 @@
   PersistentHashMap
   (-walk-term [v s] (walk-term-map* v s)))
 
-(defn- nextable?
-  [node]
-  (satisfies? INext node))
+(def checkable-exprs
+  (comp
+    (mapcat kibit/expr-seq)
+    (filter list?)))
 
 (defn ^:export lint-editor-text
   [editor-text file-name]
   (try
     (let [forms (read-all-forms-in-editor editor-text file-name)
-          exprs (mapcat kibit/expr-seq forms)
+          exprs (into [] checkable-exprs forms)
           results (keep #(kibit/check-expr % :resolution :subform) exprs)]
       {:results (map ->expr-check-result results)})
     (catch :default err

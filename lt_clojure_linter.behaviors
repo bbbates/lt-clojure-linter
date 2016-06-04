@@ -8,7 +8,6 @@
   [:editor.clj :lt.object/add-tag :clojure-linted]
   [:editor.cljs :lt.object/add-tag :clojure-linted]
   [:editor.cljc :lt.object/add-tag :clojure-linted]
-  [:editor.clojure :lt.object/add-tag :clojure-linted]
 
   [:app :lt.plugins.lt-clojure-linter.threads/shutdown-pools-on-close]
   ]
