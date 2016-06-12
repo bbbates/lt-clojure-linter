@@ -37,7 +37,7 @@
                         (notifos/done-working message)
                         (callback (map ->linter-result results)))))
 
-(def plugin-id "lt-clojure-linter")
+(def plugin-id (plugins/munge-plugin-name "lt-clojure-linter"))
 
 (defn- expr-checker-module
   []
